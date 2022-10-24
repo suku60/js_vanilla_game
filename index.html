@@ -5,15 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/characters.css">
+    <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/game.css">
     <title>warriorsjs</title>
 </head>
-<body>
+<body id="animBody">
     <div class="navbar">
-
+        <div class="navbar_item user"></div>
+        <div class="navbar_item separator"></div>
+        <div class="navbar_item chat"></div>
+        <div class="navbar_item leaderboards"></div>
     </div>
-    <section id="screen_1" class="box_screen_welcome">
-        
+    <section id="gameScreen" class="box_gameScreen">
+
+        <section id="screen_1" class="box_screen_welcome">
+            <div class="btn_skip_intro">SKIP INTRO</div>
+        </section>
     </section>
     
 </body>
