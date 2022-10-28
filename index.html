@@ -16,12 +16,39 @@
         <div class="navbar_item chat"></div>
         <div class="navbar_item leaderboards"></div>
     </div>
-    <section id="gameScreen" class="box_gameScreen">
+    <div id="gameScreen" class="box_gameScreen">
 
-        <section id="screen_1" class="box_screen_welcome">
-            <div class="btn_skip_intro">SKIP INTRO</div>
+        <!-- <section id="screen_1" class="box_screen_welcome">
+            play
+            <div class="btn_play" onclick="screenSwap(2)">PLAY</div>
         </section>
-    </section>
+        <section id="screen_2" class="box_screen_menu">
+            menu
+            <div class="btn_play" onclick="screenSwap(3)">PLAY</div>
+        </section>
+        <section id="screen_3" class="box_screen_selection">
+            select_warrior
+            <div class="btn_play" onclick="screenSwap(4)">PLAY</div>
+        </section> -->
+        <section id="screen_4" class="box_screen_battle">
+            <canvas>
+                
+            </canvas>
+            <div class="btn_play" onclick="screenSwap(5)">PLAY</div>
+        </section>
+        <!-- <section id="screen_5" class="box_screen_credits">
+            credits
+            <div class="btn_play" onclick="screenSwap(6)">PLAY</div>
+        </section>
+        <section id="screen_6" class="box_screen_leaderboards">
+            leaderboard
+            <div class="btn_play" onclick="screenSwap(1)">PLAY</div>
+        </section> -->
+    </div>
     
+    
+    <script src="js/gameFunctions.js"></script>
+    <script src="js/game.js"></script>
 </body>
+
 </html>

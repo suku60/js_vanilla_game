@@ -24,9 +24,11 @@
     width: 100%;
 
     position: relative;
+    animation: screenShowUp .5s ease-in-out;
+
 }
 
-.btn_skip_intro {
+.btn_play {
     background-color: var(--clr-screen-4-70);
     border-radius: .3rem;
     padding: .7rem;
@@ -51,9 +53,112 @@
 
 }
 
-.btn_skip_intro:hover {
+.btn_play:hover {
     background-color: var(--clr-screen-4);
     
     transition: .1s;
 
+}
+
+/* SCREENS  */
+
+.box_screen_menu{
+    background-color: var(--clr-screen-2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+
+    animation: screenShowUp .5s ease-in-out;
+}
+
+.box_screen_selection {
+    background-color: var(--clr-screen-3);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+    animation: screenShowUp .5s ease-in-out;
+
+}
+
+.box_screen_battle {
+    /* background-color: var(--clr-screen-1); */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+    animation: screenShowUp .5s ease-in-out;
+
+}
+
+.box_screen_credits {
+    background-color: var(--clr-screen-2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+    animation: screenShowUp .5s ease-in-out;
+
+}
+
+.box_screen_leaderboards {
+    background-color: var(--clr-screen-3);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+    animation: screenShowUp .5s ease-in-out;
+
+}
+
+@keyframes screenShowUp {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+
+    }
+    
+}
+
+@keyframes screenOut {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+
+    }
 }
