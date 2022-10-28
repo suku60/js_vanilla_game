@@ -11,17 +11,19 @@ context.fillRect (0, 0, canvas.width, canvas.height);
 
 class Warrior {
 
-    constructor({position, velocity, height, width}) {
+    constructor({position, velocity, height, width, color}) {
 
         this.position = position;
         this.velocity = velocity;
         this.height = height;
         this.width = width;
+        this.color = color
+        this.movementTimer = 0
 
     }
 
     create() {
-        context.fillStyle = "blue"
+        context.fillStyle = this.color
 
         context.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
@@ -36,16 +38,23 @@ class Warrior {
         }
 
         if(this.position.y < 90){
-            warriorGravity = 0.2
+            warriorGravity = 0.5
         }
 
-        if(this.position.y < canvas.height/2 + 200){
-            warriorGravity = 0.2
+        if(this.position.y < canvas.height/2 + 100){
+            warriorGravity = 0.1
         }
         
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
+        if(this.position.x <= 0){
+            this.position.x = 0
+        }
+
+        if(this.position.x >= canvas.width - this.width){
+            this.position.x = canvas.width - this.width 
+        }
         
 
         if((this.position.y + this.height + this.velocity.y) >= canvas.height) {
@@ -68,7 +77,6 @@ class Warrior {
     }
 
     move(e) {
-        console.log(e, "event on move")
     }
 };
 
@@ -82,7 +90,8 @@ const warrior_1 = new Warrior({
         y: 0
     },
     height : 50,
-    width : 90
+    width : 90,
+    color : "red"
 }
 );
 
@@ -96,7 +105,8 @@ const warrior_2 = new Warrior({
         y: 0
     },
     height : 100,
-    width : 90
+    width : 90,
+    color : "green"
 }
 );
 
@@ -156,26 +166,49 @@ const animate = () => {
     }
 }
 
-// animate()
+animate()
 
 window.addEventListener("keydown", (e) => {
+    console.log(e.key)
+
     switch (e.key) {
         case "w":
-                keys.w.pressed = true
-                if(!e.repeat){
+            keys.w.pressed = true
+            if(!e.repeat){
+                if((e.timeStamp - warrior_1.movementTimer) > 100 && (e.timeStamp - warrior_1.movementTimer) < 850){
+                    console.log(warrior_1.position.y)
+                    if(warrior_1.position.y > 410){
+                        warrior_1.velocity.y =+ -8
+                    }else if(warrior_1.position.y < 200){
+                        warrior_1.velocity.y =+ -0.5
+                    }else  warrior_1.velocity.y =+ -10
+                        warrior_1.movementTimer = e.timeStamp
+                        break
+                }
 
+                if((e.timeStamp - warrior_1.movementTimer) > 550){
+
+                    warrior_1.movementTimer = e.timeStamp
+                    
                     if (warrior_1.position.y < 50){
                         warrior_1.velocity.y = -0.1
                         
-                    } else if (warrior_1.position.y < canvas.height/2 + 200){
-                        warrior_1.velocity.y = -6
+                    } else if (warrior_1.position.y < canvas.height/2 + 100){
+                        warrior_1.velocity.y = -3
                         
                     } else warrior_1.velocity.y = -10
+                }
                 }
         break;
 
         case "s":
-            warrior_1.velocity.y = 1
+            if(!e.repeat){
+
+                if(!(warrior_1.position.y >= canvas.height - warrior_1.height)){
+                    
+                    warrior_1.velocity.y = 2
+                }
+            }
         break;
 
         case "a":
@@ -192,44 +225,6 @@ window.addEventListener("keydown", (e) => {
         default:
             break;
     }
-    console.log(e)
-})
-
-window.addEventListener("keydown", (e) => {
-    switch (e.key) {
-        case "ArrowUp":
-                keys.ArrowUp.pressed = true
-                if(!e.repeat){
-
-                    if (warrior_2.position.y < 50){
-                        warrior_2.velocity.y = -0.1
-                        
-                    } else if (warrior_2.position.y < canvas.height/2 + 200){
-                        warrior_2.velocity.y = -6
-                        
-                    } else warrior_2.velocity.y = -10
-                }
-        break;
-
-        case "ArrowDown":
-            warrior_2.velocity.y = 1
-        break;
-
-        case "ArrowLeft":
-            keys.ArrowLeft.pressed = true
-        
-        break;
-
-        case "ArrowRight":
-            keys.ArrowRight.pressed = true
-
-        
-        break;
-    
-        default:
-            break;
-    }
-    console.log(e)
 })
 
 window.addEventListener("keyup", (e) => {
@@ -259,35 +254,5 @@ window.addEventListener("keyup", (e) => {
         default:
             break;
     }
-    console.log(e)
-})
-
-window.addEventListener("keyup", (e) => {
-    switch (e.key) {
-        case "ArrowUp":
-            keys.ArrowUp.pressed = false
-            
-        break;
-
-        case "ArrowDown":
-        
-        break;
-
-        case "ArrowLeft":
-            keys.ArrowLeft.pressed = false
-            lastkey = "ArrowRight"
-
-        break;
-
-        case "ArrowRight":
-            keys.ArrowRight.pressed = false
-            lastkey = "ArrowLeft"
-
-        
-        break;
-    
-        default:
-            break;
-    }
-    console.log(e)
+    // console.log(e)
 })
