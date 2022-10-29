@@ -4,7 +4,7 @@ const context = canvas.getContext('2d');
 const gravity = 0.9
 
 canvas.width = 900
-canvas.height = 500
+canvas.height = 600
 
 context.fillRect (0, 0, canvas.width, canvas.height);
 
@@ -12,20 +12,28 @@ context.fillRect (0, 0, canvas.width, canvas.height);
 class Warrior {
 
     constructor({position, velocity, height, width, color}) {
-
         this.position = position;
         this.velocity = velocity;
         this.height = height;
         this.width = width;
         this.color = color
         this.movementTimer = 0
-
+        this.attackBox = {
+            position: this.position,
+            width: 800,
+            height: 6
+        }
+        this.isAttacking = false
     }
 
     create() {
         context.fillStyle = this.color
-
         context.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+        if(this.isAttacking){
+            context.fillStyle = "light" + this.color
+            context.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
+        }
     }
 
     update() {
@@ -67,7 +75,10 @@ class Warrior {
     }
 
     attack() {
-
+        this.isAttacking = true
+        setTimeout(() => {
+           this.isAttacking = false 
+        }, 150);
     }
 
     take_damage() {
@@ -91,27 +102,11 @@ const warrior_1 = new Warrior({
     },
     height : 50,
     width : 90,
-    color : "red"
-}
-);
-
-const warrior_2 = new Warrior({
-    position : {
-    x: 500,
-    y: 0
-    }, 
-    velocity : {
-        x: 0,
-        y: 0
-    },
-    height : 100,
-    width : 90,
-    color : "green"
+    color : "blue"
 }
 );
 
 warrior_1.create()
-warrior_2.create()
 
 const keys = {
     w: {
@@ -147,17 +142,8 @@ const animate = () => {
     context.fillStyle = "black"
     context.fillRect(0, 0, canvas.width, canvas.height)
     warrior_1.update()
-    warrior_2.update()
     
     warrior_1.velocity.x = 0
-    warrior_2.velocity.x = 0
-
-    
-    if ((keys.a.pressed && lastkey === "ArrowLeft") || keys.ArrowLeft.pressed) {
-        warrior_2.velocity.x = -9
-    } else if ((keys.d.pressed && lastkey === "ArrowRight") || keys.ArrowRight.pressed) {
-        warrior_2.velocity.x = 9
-    }
     
     if ((keys.a.pressed && lastkey === "a") || keys.a.pressed) {
         warrior_1.velocity.x = -9
@@ -221,6 +207,10 @@ window.addEventListener("keydown", (e) => {
 
         
         break;
+
+        case " ":
+            warrior_1.attack()
+            break;
     
         default:
             break;
